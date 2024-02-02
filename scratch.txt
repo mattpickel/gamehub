@@ -1,0 +1,28 @@
+submit guess
+    if currentInput < 5 letters
+        return w/ feedback
+    if !valid word
+        return w/ feedback
+    add to guesses
+    if guess != answer
+        if guess # < 6
+            inc guess #
+            clear currentInput
+            return
+        else
+            gameOver()
+            return
+    if guess == answer
+        gameWon()
+        return
+
+
+
+getRowContent
+
+if guess[rowIndex] !== null/''/undefined
+    rowContent = guess[rowIndex]
+else if rowIndex + 1 === guessNumber
+    rowContent = currentInput
+else
+    rowContent = ''
