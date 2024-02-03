@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useAuth, useUser } from '@clerk/clerk-react';
 import LoginModal from './Modals/LoginModal';
 import SignUpModal from './Modals/SignUpModal';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const NavBar: React.FC = () => {
     const { isSignedIn, signOut } = useAuth();
@@ -46,7 +48,7 @@ const NavBar: React.FC = () => {
                     )}
                 </div>
             </div>
-
+            <ToastContainer />
             
         </nav>
     );
