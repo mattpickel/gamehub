@@ -2,11 +2,11 @@ import React from 'react';
 import Tile from './Tile';
 import useRowContent from '../hooks/useRowContent';
 
-interface GameboardProps {
+interface RowProps {
     rowIndex: number;
 }
 
-const Gameboard: React.FC<GameboardProps> = ({ rowIndex }) => {
+const Row: React.FC<RowProps> = ({ rowIndex }) => {
     const getRowContent = useRowContent(rowIndex);
     const rowContent: string = getRowContent();
 
@@ -19,4 +19,4 @@ const Gameboard: React.FC<GameboardProps> = ({ rowIndex }) => {
     )
 }
 
-export default Gameboard;
+export default Row;
