@@ -18,11 +18,16 @@ submit guess
 
 
 
-getRowContent
+checkRow
 
-if guess[rowIndex] !== null/''/undefined
-    rowContent = guess[rowIndex]
-else if rowIndex + 1 === guessNumber
-    rowContent = currentInput
-else
-    rowContent = ''
+if guess does not exist
+    return default styling
+if it does
+    forEach letter in guess array
+        if letter not in remainingLetters
+            return incorrect
+        if letter === answer[index] {
+            return correct
+        } else {
+            return misplaced
+        }

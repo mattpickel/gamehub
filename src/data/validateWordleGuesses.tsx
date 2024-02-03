@@ -1,5 +1,5 @@
 const validWords: string[] = [
-    'TESTY', 'TESTS', 'APPLE'
+    'TESTY', 'TESTS', 'APPLE', 'TEEST', 'PAPPY', 
 ];
 
 const validWordSet: Set<string> = new Set(validWords);
