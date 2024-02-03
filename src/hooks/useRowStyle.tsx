@@ -1,9 +1,9 @@
-import { useGuessesStore } from '../stores/useGuessesStore';
+import { useWordleGameStore } from '../stores/useWordleGameStore';
 
 // Takes rowIndex as an argument and if the guess for that row exists, returns an array of strings describing the result of each cell. If the guess does not exist, return array of 5 'default strings.
 
 const useRowStyle = (rowIndex: number, answer: string) => {
-    const guesses = useGuessesStore((state) => state.guesses);
+    const guesses = useWordleGameStore((state) => state.guesses);
     const answerLetters = answer.split('');
 
     // Directly calculate and return styles

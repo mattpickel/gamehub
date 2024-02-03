@@ -1,12 +1,12 @@
 import isValidWord from "../data/validateWordleGuesses";
-import { useGuessesStore } from "../stores/useGuessesStore";
+import { useWordleGameStore } from "../stores/useWordleGameStore";
 import { Bounce, toast } from 'react-toastify';
 
 const useGuessSubmission = (answer: string) => {
-    const addGuess = useGuessesStore((state) => state.addGuess);
-    const incrementGuessNumber = useGuessesStore((state) => state.incrementGuessNumber);
-    const setInput = useGuessesStore((state) => state.setInput);
-    const guessNumber = useGuessesStore((state) => state.guessNumber);
+    const addGuess = useWordleGameStore((state) => state.addGuess);
+    const incrementGuessNumber = useWordleGameStore((state) => state.incrementGuessNumber);
+    const setInput = useWordleGameStore((state) => state.setInput);
+    const guessNumber = useWordleGameStore((state) => state.guessNumber);
 
     const notify = (message: string) => toast(message, {position: "top-center",
     autoClose: 5000,

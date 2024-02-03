@@ -9,7 +9,7 @@ type State = {
     incrementGuessNumber: () => void;
 };
 
-export const useGuessesStore = create<State>((set) => ({
+export const useWordleGameStore = create<State>()((set) => ({
     guessNumber: 1,
     guesses: [],
     currentInput: '',

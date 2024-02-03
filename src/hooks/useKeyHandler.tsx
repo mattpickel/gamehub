@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
-import { useGuessesStore } from '../stores/useGuessesStore';
+import { useWordleGameStore } from '../stores/useWordleGameStore';
 import isValidKey from '../data/validateWordleKeys';
 import useGuessSubmission from './useGuessSubmission';
 
 // Custom hook to handle key entry from keyboard/key listener in Wordle Game
 
 const useKeyHandler = () => {
-    const currentInput = useGuessesStore((state) => state.currentInput);
-    const setInput = useGuessesStore((state) => state.setInput);
+    const currentInput = useWordleGameStore((state) => state.currentInput);
+    const setInput = useWordleGameStore((state) => state.setInput);
     const submitGuess = useGuessSubmission('APPLE');
 
     const handleKey = useCallback((key: string) => {

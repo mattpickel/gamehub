@@ -5,7 +5,7 @@ type State = {
   setRowStyles: (rowIndex: number, styles: string[]) => void;
 };
 
-export const useRowStylesStore = create<State>((set) => ({
+export const useRowStylesStore = create<State>()((set) => ({
   rowStyles: [],
   setRowStyles: (rowIndex, styles) => set((state) => {
     const newStyles = [...state.rowStyles];

@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
-import { useGuessesStore } from '../stores/useGuessesStore';
+import { useWordleGameStore } from '../stores/useWordleGameStore';
 
 // Takes rowIndex as an argument and returns string of that row's guess, the current input, or blank string w/ a length of 5 characters
 
 const useRowContent = (rowIndex: number) => {
-  const guessNumber = useGuessesStore((state) => state.guessNumber);
-  const guesses = useGuessesStore((state) => state.guesses);
-  const currentInput = useGuessesStore((state) => state.currentInput);
+  const guessNumber = useWordleGameStore((state) => state.guessNumber);
+  const guesses = useWordleGameStore((state) => state.guesses);
+  const currentInput = useWordleGameStore((state) => state.currentInput);
 
   return useCallback(() => {
     if (guesses[rowIndex]) {
