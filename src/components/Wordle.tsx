@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Gameboard from './Gameboard';
 import Keyboard from './Keyboard';
 import GameResultModal from './Modals/GameResultModal';
 import useKeyListener from '../hooks/useKeyListener';
 import useKeyHandler from '../hooks/useKeyHandler';
+import useGameStatusChangeEffect from '../hooks/useGameStatusChangeEffect';
 import { useWordleUIStore } from '../stores/useWordleUIStore';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
 
@@ -14,37 +15,18 @@ const Wordle: React.FC = () => {
 
     // Get UI state from UI store
     const isModalOpen = useWordleUIStore((state) => state.isModalOpen);
-    const setIsModalOpen = useWordleUIStore((state) => state.setIsModalOpen);
     const modalMessage = useWordleUIStore((state) => state.modalMessage);
-    const setModalMessage = useWordleUIStore((state) => state.setModalMessage);
 
-    // Get game status from game store
-    const gameStatus = useWordleGameStore((state) => state.gameStatus);
+    // Get reset method from game store 
     const resetGame = useWordleGameStore((state) => state.resetGame);
 
-    // Define behavior for game end
-    const handleGameEnd = () => {
-        if (gameStatus === 'playing') {
-            return;
-        }
-        if (gameStatus === 'won') {
-            setModalMessage('You won!');
-        } else if (gameStatus === 'lost') {
-            setModalMessage('You lost!');
-        }
-        setIsModalOpen(true);
-    }
-
-    useEffect(() => {
-        handleGameEnd();
-    }, [gameStatus]);
+    // Use custom hook to handle game status change
+    useGameStatusChangeEffect();
 
     // Define behavior for Play Again button
     const handlePlayAgain = () => {
-        setIsModalOpen(false);
         resetGame();
     }
-
 
     return (
         <>
