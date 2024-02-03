@@ -1,0 +1,5 @@
+// display score
+// add word list and select randomly from it
+// daily game vs freeplay
+// setup backend for user stats and tracking daily game
+// friends list for tracking friends scores/sharing

@@ -1,10 +1,10 @@
 import React from 'react';
-import Wordle from '../components/Wordle';
+import WordleContainer from '../components/WordleContainer';
 
 const GamesPage: React.FC = () => {
   return (
     <div>
-      <Wordle />
+      <WordleContainer />
     </div>
   );
 };
