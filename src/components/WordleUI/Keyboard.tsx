@@ -23,7 +23,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress }) => {
                         <button
                             key={key}
                             className={`py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded shadow ${
-                                key.length > 1 ? 'flex-grow' : ''
+                                key.length > 1 ? 'flex-grow' : 'w-12 h-12'
                               } hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50`}
                             onClick={() => handleKeyPress(key)}
                         >

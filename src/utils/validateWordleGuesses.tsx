@@ -1,11 +1,7 @@
-const validWords: string[] = [
-    'TESTY', 'TESTS', 'APPLE', 'TEEST', 'PAPPY', 
-];
+import { validGuessesSet } from "../data/wordleWords";
 
-const validWordSet: Set<string> = new Set(validWords);
-
-const isValidWord = (key: string): boolean => {
-    return validWordSet.has(key);
+const isValidWord = (guess: string): boolean => {
+    return validGuessesSet.has(guess.toLowerCase());
 };
 
 export default isValidWord;

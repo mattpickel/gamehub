@@ -8,7 +8,8 @@ import useGuessSubmission from './useGuessSubmission';
 const useKeyHandler = () => {
     const currentInput = useWordleGameStore((state) => state.currentInput);
     const setInput = useWordleGameStore((state) => state.setInput);
-    const submitGuess = useGuessSubmission('APPLE');
+    const answer = useWordleGameStore((state) => state.answer);
+    const submitGuess = useGuessSubmission(answer.toUpperCase());
 
     const handleKey = useCallback((key: string) => {
         if (!isValidKey(key)) {
