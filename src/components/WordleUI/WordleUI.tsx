@@ -1,8 +1,7 @@
 import React from 'react';
 import Gameboard from './Gameboard';
 import Keyboard from './Keyboard';
-import GameResultModal from './Modals/GameResultModal';
-
+import GameResultModal from '../Modals/GameResultModal';
 
 interface WordleUIProps {
     handleKeyPress: (key: string) => void;

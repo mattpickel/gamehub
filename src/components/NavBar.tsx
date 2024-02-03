@@ -7,6 +7,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const NavBar: React.FC = () => {
+
+    // Login/Authorization for the app is contained in the NavBar component that is rendered on every page
     const { isSignedIn, signOut } = useAuth();
     const { user } = useUser();
 

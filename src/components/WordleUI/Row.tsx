@@ -1,7 +1,7 @@
 import React from 'react';
 import Tile from './Tile';
-import useRowContent from '../hooks/useRowContent';
-import useRowStyle from '../hooks/useRowStyle';
+import useRowContent from '../../hooks/useRowContent';
+import useRowStyle from '../../hooks/useRowStyle';
 
 interface RowProps {
     rowIndex: number;
