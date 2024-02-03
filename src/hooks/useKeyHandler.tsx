@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
-import isValidKey from '../data/validateWordleKeys';
+import isValidKey from '../utils/validateWordleKeys';
 import useGuessSubmission from './useGuessSubmission';
 
 // Custom hook to handle key entry from keyboard/key listener in Wordle Game

@@ -44,10 +44,10 @@ const Modal: React.FC<ModalProps> = ({ isOpen, hasCloseBtn, onClose, children })
 
     return (
         <>
-            <dialog ref={modalRef} onKeyDown={handleKeyDown}>
+            <dialog ref={modalRef} onKeyDown={handleKeyDown} className='relative'>
                 {hasCloseBtn && (
-                    <button className="modal-close-btn" onClick={handleCloseModal}>
-                        Close
+                    <button className='modal-close-btn absolute top-2 right-2 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center' onClick={handleCloseModal}>
+                        X
                     </button>
                 )}
                 {children}

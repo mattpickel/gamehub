@@ -1,4 +1,4 @@
-import isValidWord from "../data/validateWordleGuesses";
+import isValidWord from "../utils/validateWordleGuesses";
 import { useWordleGameStore } from "../stores/useWordleGameStore";
 import { Bounce, toast } from 'react-toastify';
 
@@ -7,6 +7,8 @@ const useGuessSubmission = (answer: string) => {
     const incrementGuessNumber = useWordleGameStore((state) => state.incrementGuessNumber);
     const setInput = useWordleGameStore((state) => state.setInput);
     const guessNumber = useWordleGameStore((state) => state.guessNumber);
+    const updateScore = useWordleGameStore((state) => state.updateScore);
+    const updateGameStatus = useWordleGameStore((state) => state.updateGameStatus);
 
     const notify = (message: string) => toast(message, {position: "top-center",
     autoClose: 5000,
@@ -32,12 +34,12 @@ const useGuessSubmission = (answer: string) => {
         addGuess(guess);
         console.log('answer:' + answer);
         if (guess === answer) {
-            notify('Correct guess, you win!');
+            updateScore(1);
+            updateGameStatus('won');
             return;
         } else {
             if (guessNumber > 5) {
-                notify('Out of guesses, you lose...');
-                // Game over logic here
+                updateGameStatus('lost');
                 return;
             } else {
                 notify('Wrong guess, try again.');
