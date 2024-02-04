@@ -7,27 +7,6 @@ const useRowStyle = (rowIndex: number) => {
     const answer = useWordleGameStore((state) => state.answer).toUpperCase();
     const answerLetters = answer.split('');
 
-    // Directly calculate and return styles
-    // const calculateStyles = () => {
-    //     const guess = guesses[rowIndex];
-    //     if (!guess) {
-    //         return Array.from({ length: 5 }, () => 'bg-white');
-    //     }
-
-    //     const guessLetters = guess.split('');
-    //     const remainingLetters = [...answerLetters];
-    //     return guessLetters.map((letter, index) => {
-    //         if (letter === answerLetters[index]) {
-    //             remainingLetters.splice(remainingLetters.indexOf(letter), 1);
-    //             return 'bg-wordle-correct-color';
-    //         } else if (remainingLetters.includes(letter)) {
-    //             remainingLetters.splice(remainingLetters.indexOf(letter), 1);
-    //             return 'bg-wordle-misplaced-color';
-    //         } else {
-    //             return 'bg-wordle-incorrect-color';
-    //         }
-    //     });
-    // };
     const calculateStyles = () => {
         const guess = guesses[rowIndex];
         if (!guess) {
@@ -44,16 +23,16 @@ const useRowStyle = (rowIndex: number) => {
                 remainingLetters.splice(remainingLetters.indexOf(guessLetters[i]), 1);
                 styles.push('bg-wordle-correct-color');
             } else {
-                styles.push(null);  // Placeholder for second pass
+                styles.push('bg-white');  // Placeholder for second pass
             }
         }
     
         // Second pass: Check for misplaced letters
         for (let i = 0; i < guessLetters.length; i++) {
-            if (styles[i] === null && remainingLetters.includes(guessLetters[i])) {
+            if (styles[i] === 'bg-white' && remainingLetters.includes(guessLetters[i])) {
                 remainingLetters.splice(remainingLetters.indexOf(guessLetters[i]), 1);
                 styles[i] = 'bg-wordle-misplaced-color';
-            } else if (styles[i] === null) {
+            } else if (styles[i] === 'bg-white') {
                 styles[i] = 'bg-wordle-incorrect-color';
             }
         }
