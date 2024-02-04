@@ -30,3 +30,7 @@ export const useWordleGameStore = create<State>()((set) => ({
     updateScore: (score: number) => set((state) => ({ totalScore: state.totalScore + score })),
     updateGameStatus: (status: 'playing' | 'won' | 'lost') => set({ gameStatus: status }),
 }));
+
+if (process.env.NODE_ENV === 'development') {
+    (window as any).useWordleGameStore = useWordleGameStore;
+}
