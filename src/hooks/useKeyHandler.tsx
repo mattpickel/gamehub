@@ -9,6 +9,7 @@ const useKeyHandler = () => {
     const currentInput = useWordleGameStore((state) => state.currentInput);
     const setInput = useWordleGameStore((state) => state.setInput);
     const answer = useWordleGameStore((state) => state.answer);
+    const gameStatus = useWordleGameStore((state) => state.gameStatus);
     const submitGuess = useGuessSubmission(answer.toUpperCase());
 
     const handleKey = useCallback((key: string) => {
@@ -19,7 +20,7 @@ const useKeyHandler = () => {
             setInput(currentInput.slice(0, -1));
         } else if (key === 'ENTER') {
             // Submit guess here
-            if (typeof submitGuess === 'function') {
+            if (typeof submitGuess === 'function' && gameStatus === 'playing') {
                 submitGuess(currentInput);
             }
             return;
@@ -29,7 +30,7 @@ const useKeyHandler = () => {
             }
             setInput(currentInput + key);
         }
-    }, [currentInput, setInput]);
+    }, [currentInput, setInput, gameStatus, submitGuess, answer]);
 
     return handleKey;
     
