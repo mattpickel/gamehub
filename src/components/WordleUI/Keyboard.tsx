@@ -37,11 +37,13 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress, letterStatusList }) => 
                             className += ' bg-wordle-incorrect-color';
                         } else if (status === 'misplaced') {
                             className += ' bg-wordle-misplaced-color';
+                        } else {
+                            className += ' hover:bg-gray-300';
                         }
                         return (
                             <button
                                 key={key}
-                                className={`${className} hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50`}
+                                className={`${className} focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50`}
                                 onClick={() => handleKeyPress(key)}
                             >
                                 {key === 'DELETE' ? '⌫' : key === 'ENTER' ? '↵' : key}
