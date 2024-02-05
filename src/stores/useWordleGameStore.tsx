@@ -10,7 +10,6 @@ type State = {
     guessNumber: number;
     guesses: string[];
     currentInput: string;
-    totalScore: number;
     gameStatus: 'playing' | 'won' | 'lost';
     answer: string;
     letterStatusList: LetterStatus[];
@@ -18,7 +17,6 @@ type State = {
     setInput: (input: string) => void;
     incrementGuessNumber: () => void;
     resetGame: () => void;
-    updateScore: (score: number) => void;
     updateGameStatus: (status: 'playing' | 'won' | 'lost') => void;
     updateLetterStatus: (letter: string, status: 'correct' | 'incorrect' | 'misplaced' | 'not-guessed') => void;
     resetLetterStatus: () => void;
@@ -28,7 +26,6 @@ export const useWordleGameStore = create<State>()((set) => ({
     guessNumber: 1,
     guesses: Array(6).fill(''),
     currentInput: '',
-    totalScore: 0,
     gameStatus: 'playing',
     answer: generateRandomWord(),
     letterStatusList: Array.from({length: 26}, (_, i) => ({
@@ -46,7 +43,6 @@ export const useWordleGameStore = create<State>()((set) => ({
         state.resetLetterStatus();
         return { guessNumber: 1, guesses: Array(6).fill(''), currentInput: '', totalScore: 0, gameStatus: 'playing', answer: generateRandomWord() };
     }),
-    updateScore: (score: number) => set((state) => ({ totalScore: state.totalScore + score })),
     updateGameStatus: (status: 'playing' | 'won' | 'lost') => set({ gameStatus: status }),
     updateLetterStatus(letter: string, status: 'correct' | 'incorrect' | 'misplaced' | 'not-guessed') {
         set((state) => {
