@@ -3,13 +3,17 @@ import { useWordleGameStore } from "../stores/useWordleGameStore";
 import { Bounce, toast } from 'react-toastify';
 
 const useGuessSubmission = (answer: string) => {
-    const addGuess = useWordleGameStore((state) => state.addGuess);
-    const incrementGuessNumber = useWordleGameStore((state) => state.incrementGuessNumber);
-    const setInput = useWordleGameStore((state) => state.setInput);
-    const guessNumber = useWordleGameStore((state) => state.guessNumber);
-    const updateScore = useWordleGameStore((state) => state.updateScore);
-    const updateGameStatus = useWordleGameStore((state) => state.updateGameStatus);
+    // Get state and actions from game store
+    const {
+        addGuess,
+        incrementGuessNumber,
+        setInput,
+        guessNumber,
+        updateScore,
+        updateGameStatus
+    } = useWordleGameStore((state) => state);
 
+    // Toasty notification and configuration
     const notify = (message: string) => toast(message, {position: "top-center",
     autoClose: 5000,
     hideProgressBar: true,

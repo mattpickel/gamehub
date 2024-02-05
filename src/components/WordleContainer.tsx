@@ -3,6 +3,7 @@ import WordleUI from './WordleUI/WordleUI';
 import useKeyListener from '../hooks/useKeyListener';
 import useKeyHandler from '../hooks/useKeyHandler';
 import useGameStatusChangeEffect from '../hooks/useGameStatusChangeEffect';
+import useRowStyle from '../hooks/useRowStyle';
 import { useWordleUIStore } from '../stores/useWordleUIStore';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
 
@@ -17,6 +18,11 @@ const WordleContainer: React.FC = () => {
         modalMessage: state.modalMessage,
     }));
 
+    // Determine row styles to pass to UI
+    const getRowStyles = useRowStyle();
+    const rowStyles: string[][] = getRowStyles;
+    console.log(rowStyles);
+
     // Use custom hook to handle game status change
     useGameStatusChangeEffect();
 
@@ -29,7 +35,7 @@ const WordleContainer: React.FC = () => {
     }
 
     return (
-        <WordleUI handleKeyPress={handleKeyPress} isModalOpen={isModalOpen} modalMessage={modalMessage} handlePlayAgain={handlePlayAgain} />
+        <WordleUI handleKeyPress={handleKeyPress} isModalOpen={isModalOpen} modalMessage={modalMessage} handlePlayAgain={handlePlayAgain} rowStyles={rowStyles}/>
     )
 }
 
