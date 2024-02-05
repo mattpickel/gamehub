@@ -2,15 +2,20 @@ import isValidWord from "../utils/validateWordleGuesses";
 import { useWordleGameStore } from "../stores/useWordleGameStore";
 import { Bounce, toast } from 'react-toastify';
 
-const useGuessSubmission = (answer: string) => {
+// Custom hook to handle guess submission. Validate guess and check against answer, ending game if won or lost.
+
+const useGuessSubmission = () => {
     // Get state and actions from game store
     const {
+        answer,
         addGuess,
         incrementGuessNumber,
         setInput,
         guessNumber,
         updateScore,
-        updateGameStatus
+        updateGameStatus,
+        letterStatusList,
+        updateLetterStatus,
     } = useWordleGameStore((state) => state);
 
     // Toasty notification and configuration
@@ -34,9 +39,24 @@ const useGuessSubmission = (answer: string) => {
             notify('Guess must be a valid word');
             return;
         }
-        // Add guess to list of guesses and check against answer
+        // Add guess to list of guesses 
         addGuess(guess);
+
+        // Update key status for virtual keyboard to reflect guessed letters
+        guess.split('').forEach((letter, index) => {
+            const currentStatus = letterStatusList[letter.charCodeAt(0) - 65].status;
+            if (letter === answer[index]) {
+                updateLetterStatus(letter, 'correct');
+            } else if (answer.includes(letter) && currentStatus !== 'correct') {
+                updateLetterStatus(letter, 'misplaced');
+            } else if (currentStatus === 'not-guessed') {
+                updateLetterStatus(letter, 'incorrect');
+            }
+        
+        })
         console.log('answer:' + answer);
+
+        // Check if guess is correct and update game status
         if (guess === answer) {
             updateScore(1);
             updateGameStatus('won');

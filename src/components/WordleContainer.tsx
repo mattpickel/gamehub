@@ -19,6 +19,9 @@ const WordleContainer: React.FC = () => {
         modalMessage: state.modalMessage,
     }));
 
+    // Get guessed letters from game store to pass to UI for keyboard styling
+    const letterStatusList = useWordleGameStore((state) => state.letterStatusList);
+
     // Determine row contents and styles to pass to UI
     const getRowContent = useRowContent();
     const rowContents: string[] = getRowContent;
@@ -37,7 +40,7 @@ const WordleContainer: React.FC = () => {
     }
 
     return (
-        <WordleUI handleKeyPress={handleKeyPress} isModalOpen={isModalOpen} modalMessage={modalMessage} handlePlayAgain={handlePlayAgain} rowContents={rowContents} rowStyles={rowStyles}/>
+        <WordleUI handleKeyPress={handleKeyPress} isModalOpen={isModalOpen} modalMessage={modalMessage} handlePlayAgain={handlePlayAgain} letterStatusList={letterStatusList} rowContents={rowContents} rowStyles={rowStyles}/>
     )
 }
 

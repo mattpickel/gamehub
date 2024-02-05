@@ -10,17 +10,18 @@ interface WordleUIProps {
     isModalOpen: boolean;
     modalMessage: string;
     handlePlayAgain: () => void;
+    letterStatusList: { letter: string, status: string }[];
     rowContents: string[];
     rowStyles: string[][];
 }
 
-const WordleUI: React.FC<WordleUIProps> = ({ handleKeyPress, isModalOpen, modalMessage, handlePlayAgain, rowContents, rowStyles }) => {
+const WordleUI: React.FC<WordleUIProps> = ({ handleKeyPress, isModalOpen, modalMessage, handlePlayAgain, letterStatusList, rowContents, rowStyles }) => {
 
     return (
         <main className='flex flex-col justify-start items-center space-y-20 mt-16' style={{ height: 'calc(100vh - 68px - 8rem)' }}>
             <ButtonToolbar buttons={[{ text: 'New Game', onClick: handlePlayAgain }]} />
             <Gameboard rowContents={rowContents} rowStyles={rowStyles} />
-            <Keyboard onKeyPress={handleKeyPress} />
+            <Keyboard onKeyPress={handleKeyPress} letterStatusList={letterStatusList} />
             <GameResultModal isOpen={isModalOpen} onClose={() => {}} onPlayAgain={handlePlayAgain} message={modalMessage} />
         </main>
     )
