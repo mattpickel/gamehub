@@ -31,3 +31,10 @@ if it does
         } else {
             return misplaced
         }
+
+
+
+Total Games Played: 
+Total Games Won:
+Win Percentage:
+Longest Streak:

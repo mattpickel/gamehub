@@ -16,7 +16,6 @@ const NavBar: React.FC = () => {
     const [isSignUpModalOpen, setSignUpModalOpen] = React.useState(false);
 
     const handleLoginClick = () => {
-        console.log('clicked');
         setLoginModalOpen(true);
     };
 
@@ -44,14 +43,14 @@ const NavBar: React.FC = () => {
                         <>
                             <button onClick={handleLoginClick} className="text-white bg-blue-500 w-24 px-3 py-2 rounded-md text-sm font-medium">Login</button>
                             <button onClick={handleRegisterClick} className="text-white bg-green-600 w-24 px-3 py-2 rounded-md text-sm font-medium">Sign Up</button>
-                            <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
-                            <SignUpModal isOpen={isSignUpModalOpen} onClose={() => setSignUpModalOpen(false)} />
+                            
                         </>
                     )}
                 </div>
             </div>
             <ToastContainer />
-            
+            <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
+            <SignUpModal isOpen={isSignUpModalOpen} onClose={() => setSignUpModalOpen(false)} />
         </nav>
     );
 };

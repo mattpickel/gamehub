@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 interface ModalProps {
     isOpen: boolean;
@@ -17,6 +19,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, hasCloseBtn, onClose, children })
         }
         setModalOpen(false);
     }
+
+    const [isHovered, setIsHovered] = useState(false);
 
     // Update state when escape key is pressed
     const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
@@ -44,11 +48,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, hasCloseBtn, onClose, children })
 
     return (
         <>
-            <dialog ref={modalRef} onKeyDown={handleKeyDown} className='relative'>
+            <dialog ref={modalRef} onKeyDown={handleKeyDown} className='bg-gray-800 rounded-lg'>
                 {hasCloseBtn && (
-                    <button className='modal-close-btn absolute top-2 right-2 bg-red-500 text-white rounded-full h-6 w-6 flex items-center justify-center' onClick={handleCloseModal}>
-                        X
-                    </button>
+                    <button 
+                    className='modal-close-btn absolute top-2 right-2 h-4 w-4 flex items-center justify-center align-middle text-white outline-none' 
+                    onClick={handleCloseModal}
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                >
+                    {isHovered ? <CancelIcon /> : <HighlightOffIcon />}
+                </button>
                 )}
                 {children}
             </dialog>

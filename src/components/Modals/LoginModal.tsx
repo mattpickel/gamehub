@@ -11,7 +11,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
     return (
         <>
             <Modal isOpen={isOpen} onClose={onClose} hasCloseBtn={true}>
-                <SignIn></SignIn>
+                <div className={'py-8'}>
+                    <SignIn></SignIn>
+                </div>
             </Modal>
         </>
     )

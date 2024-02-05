@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import isValidWord from "../utils/validateWordleGuesses";
 import { useWordleGameStore } from "../stores/useWordleGameStore";
 import useUpdateScore from "./useUpdateScore";
