@@ -6,11 +6,13 @@ import useGuessSubmission from './useGuessSubmission';
 // Custom hook to handle key entry from keyboard/key listener in Wordle Game
 
 const useKeyHandler = () => {
-    const currentInput = useWordleGameStore((state) => state.currentInput);
-    const setInput = useWordleGameStore((state) => state.setInput);
-    const answer = useWordleGameStore((state) => state.answer);
-    const gameStatus = useWordleGameStore((state) => state.gameStatus);
-    const submitGuess = useGuessSubmission(answer.toUpperCase());
+    const { currentInput, setInput, answer, gameStatus } = useWordleGameStore((state) => ({
+        currentInput: state.currentInput,
+        setInput: state.setInput,
+        answer: state.answer,
+        gameStatus: state.gameStatus,
+    }));
+    const submitGuess = useGuessSubmission(answer);
 
     const handleKey = useCallback((key: string) => {
         if (!isValidKey(key)) {

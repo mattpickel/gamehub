@@ -5,7 +5,7 @@ import { useWordleGameStore } from '../stores/useWordleGameStore';
 
 const useRowStyle = (): string[][] => {
     const guesses = useWordleGameStore((state) => state.guesses);
-    const answer = useWordleGameStore((state) => state.answer).toUpperCase();
+    const answer = useWordleGameStore((state) => state.answer);
     const answerLetters = answer.split('');
 
     const calculateStyles = () => {
