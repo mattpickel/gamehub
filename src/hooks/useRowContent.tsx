@@ -1,22 +1,28 @@
-import { useCallback } from 'react';
+import { useMemo } from 'react';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
 
-// Takes rowIndex as an argument and returns string of that row's guess, the current input, or blank string w/ a length of 5 characters
+// Returns an array of strings representing the contents of each cell in the gameboard. If the guess for that row exists, return the guess. If the guess does not exist, return the current input if the row is the current row, otherwise return 5 spaces.
 
-const useRowContent = (rowIndex: number) => {
-  const guessNumber = useWordleGameStore((state) => state.guessNumber);
-  const guesses = useWordleGameStore((state) => state.guesses);
-  const currentInput = useWordleGameStore((state) => state.currentInput);
+const useRowContent = (): string[] => {
+  const { guessNumber, guesses, currentInput } = useWordleGameStore((state) => ({
+    guessNumber: state.guessNumber,
+    guesses: state.guesses,
+    currentInput: state.currentInput,
+  }));
 
-  return useCallback(() => {
-    if (guesses[rowIndex]) {
-      return guesses[rowIndex];
-    } else if (rowIndex === guessNumber - 1) {
-      return currentInput;
-    } else {
-      return '     ';
-    }
-  }, [guesses, rowIndex, guessNumber, currentInput]);
-};
+  const calculateContents = () => {
+    return guesses.map((guess, index) => {
+      if (guess) {
+        return guess;
+      } else if (index === guessNumber - 1) {
+        return currentInput;
+      } else {
+        return '     ';
+      }
+    })
+  };
+
+  return useMemo(calculateContents, [guesses, guessNumber, currentInput]);
+}
 
 export default useRowContent;

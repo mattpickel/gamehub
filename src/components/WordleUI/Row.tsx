@@ -1,16 +1,12 @@
 import React from 'react';
 import Tile from './Tile';
-import useRowContent from '../../hooks/useRowContent';
 
 interface RowProps {
-    rowIndex: number;
+    rowContent: string;
     rowStyle: string[];
 }
 
-const Row: React.FC<RowProps> = ({ rowIndex, rowStyle }) => {
-    const getRowContent = useRowContent(rowIndex);
-    const rowContent: string = getRowContent();
-    
+const Row: React.FC<RowProps> = ({ rowContent, rowStyle }) => {
     return (
         <div className='flex space-x-2'>
             {Array.from({ length: 5 }).map((_, index) => (

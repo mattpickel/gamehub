@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
 
-// Takes rowIndex as an argument and if the guess for that row exists, returns an array of strings describing the result of each cell. If the guess does not exist, return array of 5 'default strings.
+// Returns an array of arrays of strings, each representing the styles for a row of the gameboard based on the current guesses and answer
 
 const useRowStyle = (): string[][] => {
     const guesses = useWordleGameStore((state) => state.guesses);
@@ -9,7 +9,6 @@ const useRowStyle = (): string[][] => {
     const answerLetters = answer.split('');
 
     const calculateStyles = () => {
-        console.log(guesses, answer);
         return guesses.map(guess => {
             if (!guess) {
                 return Array.from({ length: 5 }, () => 'bg-white');
