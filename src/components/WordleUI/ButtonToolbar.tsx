@@ -7,7 +7,7 @@ interface ButtonToolbarProps {
 
 const ButtonToolbar: React.FC<ButtonToolbarProps> = ({ buttons }) => {
     return (
-        <div className='flex justify-center space-x-4'>
+        <div className='flex justify-center space-x-8'>
             {buttons.map((button, index) => <Button key={index} icon={button.icon} onClick={button.onClick} />)}
         </div>
     )

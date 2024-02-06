@@ -24,8 +24,6 @@ const WordleContainer: React.FC = () => {
         setIsModalOpen: state.setIsModalOpen
     }));
 
-    
-
     // Use custom hook to handle game status change and open game-over modal
     useGameStatusChangeEffect();
 
@@ -50,10 +48,17 @@ const WordleContainer: React.FC = () => {
         setIsModalOpen(true);
     }
 
+    const handleLeaderboardClick = () => {
+        setModalType('leaderboard');
+        setIsModalOpen(true);
+    }
+
+    // Define button objects to pass to UI
     type buttonObject = { icon: JSX.Element, onClick: () => void };
     const buttons: buttonObject[] = [
-        { icon: <RefreshIcon />, onClick: handlePlayAgain },
-        { icon: <SettingsIcon />, onClick: handleSettingsClick},
+        { icon: <LeaderboardIcon fontSize='large' />, onClick: handleLeaderboardClick},
+        { icon: <RefreshIcon fontSize='large' />, onClick: handlePlayAgain },
+        { icon: <SettingsIcon fontSize='large' />, onClick: handleSettingsClick},
     ];
 
     return (
