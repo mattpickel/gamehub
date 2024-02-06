@@ -6,16 +6,19 @@ const useGameStatusChangeEffect = () => {
     const gameStatus = useWordleGameStore((state) => state.gameStatus);
     const setIsModalOpen = useWordleUIStore((state) => state.setIsModalOpen);
     const setModalMessage = useWordleUIStore((state) => state.setModalMessage);
+    const setModalType = useWordleUIStore((state) => state.setModalType);
     useEffect(() => {
         switch (gameStatus) {
             case 'playing':
               setIsModalOpen(false);
               break;
             case 'won':
+              setModalType('gameOver');
               setModalMessage('Nice Job!');
               setIsModalOpen(true);
               break;
             case 'lost':
+              setModalType('gameOver');
               setModalMessage('Maybe next time!');
               setIsModalOpen(true);
               break;

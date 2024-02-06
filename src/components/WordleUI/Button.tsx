@@ -1,19 +1,19 @@
 import React from 'react';
 
 interface ButtonProps {
-    text: string;
+    icon: JSX.Element;
     onClick: () => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ text, onClick }) => {
+const Button: React.FC<ButtonProps> = ({ icon, onClick }) => {
     return (
         <button 
-            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={(event) => {
+            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded' onClick={(event) => {
                 onClick();
                 (event.target as HTMLButtonElement).blur();
             }}
         >
-            {text}
+            {icon}
         </button>
     )
 }

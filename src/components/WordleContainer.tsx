@@ -7,7 +7,9 @@ import useRowContent from '../hooks/useRowContent';
 import useRowStyle from '../hooks/useRowStyle';
 import { useWordleUIStore } from '../stores/useWordleUIStore';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
-import { useWordleScoreStore } from '../stores/useWordleScoreStore';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 
 const WordleContainer: React.FC = () => {
     // User input is handled with key keypresses. Attach handler to keylistener and pass to UI for use w/ virtual keyboard
@@ -15,12 +17,19 @@ const WordleContainer: React.FC = () => {
     useKeyListener(handleKeyPress);
 
     // Get modal state from UI store to pass to UI
-    const { isModalOpen, modalMessage } = useWordleUIStore((state) => ({
+    const { isModalOpen, modalMessage, setModalType, setIsModalOpen } = useWordleUIStore((state) => ({
         isModalOpen: state.isModalOpen,
         modalMessage: state.modalMessage,
+        setModalType: state.setModalType,
+        setIsModalOpen: state.setIsModalOpen
     }));
 
-    // Get guessed letters from game store to pass to UI for keyboard styling
+    
+
+    // Use custom hook to handle game status change and open game-over modal
+    useGameStatusChangeEffect();
+
+    // Get list of letter statuses from game store to pass to UI for keyboard styling
     const letterStatusList = useWordleGameStore((state) => state.letterStatusList);
 
     // Determine row contents and styles to pass to UI
@@ -29,25 +38,35 @@ const WordleContainer: React.FC = () => {
     const getRowStyles = useRowStyle();
     const rowStyles: string[][] = getRowStyles;
 
-    // Use custom hook to handle game status change
-    useGameStatusChangeEffect();
 
-    // Get reset method from game store 
+    // Get reset method from game store and pass to UI for use in buttons
     const resetGame = useWordleGameStore((state) => state.resetGame);
-
-    // Define method to pass to UI for resetting game
     const handlePlayAgain = () => {
         resetGame();
     }
 
-    const totalGamesPlayed = useWordleScoreStore((state) => state.totalGamesPlayed);
-    const totalGamesWon = useWordleScoreStore((state) => state.totalGamesWon);
-    const longestStreak = useWordleScoreStore((state) => state.longestStreak);
-    const currentStreak = useWordleScoreStore((state) => state.currentStreak);
-    console.log('totalGamesPlayed: ' + totalGamesPlayed, 'totalGamesWon: ' + totalGamesWon, 'longestStreak: ' + longestStreak, 'currentStreak: ' + currentStreak);
+    const handleSettingsClick = () => {
+        setModalType('settings');
+        setIsModalOpen(true);
+    }
+
+    type buttonObject = { icon: JSX.Element, onClick: () => void };
+    const buttons: buttonObject[] = [
+        { icon: <RefreshIcon />, onClick: handlePlayAgain },
+        { icon: <SettingsIcon />, onClick: handleSettingsClick},
+    ];
 
     return (
-        <WordleUI handleKeyPress={handleKeyPress} isModalOpen={isModalOpen} modalMessage={modalMessage} handlePlayAgain={handlePlayAgain} letterStatusList={letterStatusList} rowContents={rowContents} rowStyles={rowStyles}/>
+        <WordleUI 
+            handleKeyPress={handleKeyPress} 
+            isModalOpen={isModalOpen} 
+            modalMessage={modalMessage} 
+            handlePlayAgain={handlePlayAgain} 
+            letterStatusList={letterStatusList} 
+            rowContents={rowContents} 
+            rowStyles={rowStyles}
+            buttons={buttons}
+        />
     )
 }
 
