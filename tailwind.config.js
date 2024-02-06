@@ -9,9 +9,9 @@ export default {
       colors: {
         'default-tile': '#121213',
         'default-key': '#818384',
-        'wordle-correct-color': '#538d4e',
-        'wordle-incorrect-color': '#3a3a3c',
-        'wordle-misplaced-color': '#b59f3b',
+        'wordle-correct-color': '#6fbf60',
+        'wordle-incorrect-color': '#5a5a5e',
+        'wordle-misplaced-color': '#d6bf56',
       }
     },
   },

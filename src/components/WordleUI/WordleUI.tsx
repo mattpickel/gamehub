@@ -15,9 +15,10 @@ interface WordleUIProps {
     rowContents: string[];
     rowStyles: string[][];
     buttons: { icon: JSX.Element, onClick: () => void }[];
+    handleRestart: () => void;
 }
 
-const WordleUI: React.FC<WordleUIProps> = ({ handleKeyPress, isModalOpen, modalMessage, handlePlayAgain, letterStatusList, rowContents, rowStyles, buttons }) => {
+const WordleUI: React.FC<WordleUIProps> = ({ handleKeyPress, isModalOpen, modalMessage, handlePlayAgain, handleRestart, letterStatusList, rowContents, rowStyles, buttons }) => {
     const setIsModalOpen = useWordleUIStore((state) => state.setIsModalOpen);
 
     const mainRef = useRef<HTMLDivElement>(null);
@@ -34,7 +35,7 @@ const WordleUI: React.FC<WordleUIProps> = ({ handleKeyPress, isModalOpen, modalM
             <ButtonToolbar buttons={buttons} />
             <Gameboard rowContents={rowContents} rowStyles={rowStyles} />
             <Keyboard onKeyPress={handleKeyPress} letterStatusList={letterStatusList} />
-            <WordleModal isOpen={isModalOpen} onClose={handleCloseModal} onPlayAgain={handlePlayAgain} message={modalMessage} />
+            <WordleModal isOpen={isModalOpen} onClose={handleCloseModal} onPlayAgain={handlePlayAgain} message={modalMessage} onRestart={handleRestart}/>
         </main>
     )
 }

@@ -32,11 +32,11 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress, letterStatusList }) => 
                             className += ' w-12 h-12';
                         }
                         if (status === 'correct') {
-                            className += ' bg-wordle-correct-color';
+                            className += ' bg-wordle-correct-color text-white';
                         } else if (status === 'incorrect') {
-                            className += ' bg-wordle-incorrect-color';
+                            className += ' bg-wordle-incorrect-color text-white';
                         } else if (status === 'misplaced') {
-                            className += ' bg-wordle-misplaced-color';
+                            className += ' bg-wordle-misplaced-color text-white';
                         } else {
                             className += ' hover:bg-gray-300';
                         }

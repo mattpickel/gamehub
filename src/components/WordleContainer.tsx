@@ -5,11 +5,13 @@ import useKeyHandler from '../hooks/useKeyHandler';
 import useGameStatusChangeEffect from '../hooks/useGameStatusChangeEffect';
 import useRowContent from '../hooks/useRowContent';
 import useRowStyle from '../hooks/useRowStyle';
+import useUpdateScore from '../hooks/useUpdateScore';
 import { useWordleUIStore } from '../stores/useWordleUIStore';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 const WordleContainer: React.FC = () => {
     // User input is handled with key keypresses. Attach handler to keylistener and pass to UI for use w/ virtual keyboard
@@ -37,15 +39,18 @@ const WordleContainer: React.FC = () => {
     const rowStyles: string[][] = getRowStyles;
 
 
-    // Get reset method from game store and pass to UI for use in buttons
+    // Get reset and score update methods from game store and pass to UI for use in buttons
+    // Define click handlers for other buttons
     const resetGame = useWordleGameStore((state) => state.resetGame);
+    const updateScore = useUpdateScore();
     const handlePlayAgain = () => {
         resetGame();
     }
 
-    const handleSettingsClick = () => {
-        setModalType('settings');
-        setIsModalOpen(true);
+    const handleRestartGame = () => {
+        resetGame();
+        updateScore('lost');
+        setIsModalOpen(false);
     }
 
     const handleLeaderboardClick = () => {
@@ -53,12 +58,29 @@ const WordleContainer: React.FC = () => {
         setIsModalOpen(true);
     }
 
+    const gameStatus = useWordleGameStore((state) => state.gameStatus);
+    const handleRestartClick = () => {
+        gameStatus === 'playing' ? setModalType('restart') : setModalType('gameOver');
+        setIsModalOpen(true);
+    }
+
+    const handleSettingsClick = () => {
+        setModalType('settings');
+        setIsModalOpen(true);
+    }
+
+    const handleHelpClick = () => {
+        setModalType('help');
+        setIsModalOpen(true);
+    }
+
     // Define button objects to pass to UI
     type buttonObject = { icon: JSX.Element, onClick: () => void };
     const buttons: buttonObject[] = [
         { icon: <LeaderboardIcon fontSize='large' />, onClick: handleLeaderboardClick},
-        { icon: <RefreshIcon fontSize='large' />, onClick: handlePlayAgain },
+        { icon: <RefreshIcon fontSize='large' />, onClick: handleRestartClick },
         { icon: <SettingsIcon fontSize='large' />, onClick: handleSettingsClick},
+        { icon: <HelpOutlineIcon fontSize='large' />, onClick: handleHelpClick},
     ];
 
     return (
@@ -66,7 +88,8 @@ const WordleContainer: React.FC = () => {
             handleKeyPress={handleKeyPress} 
             isModalOpen={isModalOpen} 
             modalMessage={modalMessage} 
-            handlePlayAgain={handlePlayAgain} 
+            handlePlayAgain={handlePlayAgain}
+            handleRestart={handleRestartGame} 
             letterStatusList={letterStatusList} 
             rowContents={rowContents} 
             rowStyles={rowStyles}
