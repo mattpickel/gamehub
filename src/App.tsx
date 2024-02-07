@@ -5,7 +5,7 @@ import NavBar from './components/NavBar';
 
 const App: React.FC = () => {
   return (
-    <div className='h-screen'>
+    <div className='h-screen flex flex-col'>
       <NavBar />
       <Routes>
         <Route path="/" element={<GamesPage />} />

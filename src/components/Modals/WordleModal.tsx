@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from './Modal';
 import { useWordleUIStore } from '../../stores/useWordleUIStore';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import wordleHowToPlayImages from '../../assets/imgs/wordleHowToPlayImages.js';
 
@@ -23,16 +25,14 @@ interface GameResultModalProps {
 
 // Type definition for settings switch props
 type SwitchSetting = { 
-    inputProps: { inputProps: { 'aria-label': string } },
-    displayText: string; 
+    inputProps: { checked?: boolean, onChange: (event: React.ChangeEvent<HTMLInputElement>) => void },
+    displayText: string,
 };
 
-// Define labels for settings switches
-const switchSettings: SwitchSetting[] = [
-    { inputProps: { inputProps: { 'aria-label': 'Dark Mode' } }, displayText: 'Dark Mode' },
-    { inputProps: { inputProps: { 'aria-label': 'Hard Mode' } }, displayText: 'Hard Mode' },
-    { inputProps: { inputProps: { 'aria-label': 'Show My Stats' } }, displayText: 'Show My Stats' }
-];
+
+
+// State for each switch
+
 
 const LeaderBoardModal: React.FC = () => {
     return (
@@ -72,16 +72,27 @@ const RestartModal: React.FC<RestartModalProps> = ({ onRestart }) => {
 };
 
 const SettingsModal: React.FC = () => {
+    const isScoreDisplayed = useWordleUIStore((state) => state.isScoreDisplayed);
+    const setIsScoreDisplayed = useWordleUIStore((state) => state.setIsScoreDisplayed);
+
+    // Define labels for settings switches
+    const switchSettings: SwitchSetting[] = [
+        { inputProps: { onChange: (event) => console.log(event) }, displayText: 'Dark Mode' },
+        { inputProps: { onChange: (event) => console.log(event) }, displayText: 'Hard Mode' },
+        { inputProps: { checked: isScoreDisplayed, onChange: (event) => setIsScoreDisplayed(event.target.checked)}, displayText: 'Show My Stats' }
+    ];
     return (
         <div className='flex flex-col justify-center items-center space-y-8 rounded-lg py-8 px-10 bg-gray-800 text-white'>
             <h1 className='text-3xl font-bold'>Settings</h1>
-            <ul className='text-left flex flex-col'>
-                 {switchSettings.map((label, index) => (
-                    <li key={index}>
-                        <Switch {...label.inputProps} /> {label.displayText}
-                    </li>
+            <FormGroup>
+                {switchSettings.map((label, index) => (
+                    <FormControlLabel
+                        key={index}
+                        control={<Switch {...label.inputProps} />}
+                        label={label.displayText}
+                    />
                 ))}
-            </ul>
+            </FormGroup>
         </div>
     )
 };

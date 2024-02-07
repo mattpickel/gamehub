@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
+import ScoreDisplay from './ScoreDisplay';
 import Gameboard from './Gameboard';
 import Keyboard from './Keyboard';
 import WordleModal from '../Modals/WordleModal';
 import ButtonToolbar from './ButtonToolbar';
 import { useWordleUIStore } from '../../stores/useWordleUIStore';
-// import { useWordleGameStore } from '../../stores/useWordleGameStore';
 
 interface WordleUIProps {
     handleKeyPress: (key: string) => void;
@@ -30,10 +30,15 @@ const WordleUI: React.FC<WordleUIProps> = ({ handleKeyPress, isModalOpen, modalM
         }, 0); 
     };
 
+    const isScoreDisplayed = useWordleUIStore((state) => state.isScoreDisplayed);
+
     return (
-        <main ref={mainRef} tabIndex={-1} className='flex flex-col justify-start items-center space-y-10 md:space-y-20 mt-8 outline-none'>
+        <main ref={mainRef} tabIndex={-1} className='flex-grow flex flex-col outline-none space-y-8 sm:space-y-20 mt-8 sm:mt-20'>          
             <ButtonToolbar buttons={buttons} />
-            <Gameboard rowContents={rowContents} rowStyles={rowStyles} />
+            <div className='flex flex-col items-center space-y-6 sm:space-y-12'>
+                {isScoreDisplayed ? <ScoreDisplay /> : null}
+                <Gameboard rowContents={rowContents} rowStyles={rowStyles} />
+            </div>
             <Keyboard onKeyPress={handleKeyPress} letterStatusList={letterStatusList} />
             <WordleModal isOpen={isModalOpen} onClose={handleCloseModal} onPlayAgain={handlePlayAgain} message={modalMessage} onRestart={handleRestart}/>
         </main>

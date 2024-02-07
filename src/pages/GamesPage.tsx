@@ -3,9 +3,9 @@ import WordleContainer from '../components/WordleContainer';
 
 const GamesPage: React.FC = () => {
   return (
-    <div>
+    <>
       <WordleContainer />
-    </div>
+    </>
   );
 };
 

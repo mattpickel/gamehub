@@ -17,9 +17,9 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress, letterStatusList }) => 
     };
 
     return (
-        <div className='keyboard'>
+        <div className='keyboard space-y-1'>
             {rows.map((row, rowIndex) => (
-                <div key={rowIndex} className='flex justify-center space-x-1 mb-2'>
+                <div key={rowIndex} className='flex justify-center space-x-1'>
                     {row.map((key) => {
                         let status;
                         if (key.length === 1) {
@@ -27,7 +27,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress, letterStatusList }) => 
                         }
                         let className = ' bg-gray-200 text-gray-800 font-semibold rounded shadow text-sm sm:text-base md:text-lg';
                         if (key.length > 1) {
-                            className += ' flex-grow';
+                            className += ' flex-grow max-w-[60px] sm:max-w-[75px]';
                         } else {
                             className += ' w-8 h-12 sm:w-12 sm:h-14';
                         }

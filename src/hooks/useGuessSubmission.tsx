@@ -1,7 +1,7 @@
 import isValidWord from "../utils/validateWordleGuesses";
 import { useWordleGameStore } from "../stores/useWordleGameStore";
 import useUpdateScore from "./useUpdateScore";
-import { Bounce, toast } from 'react-toastify';
+import { Zoom, toast } from 'react-toastify';
 
 // Custom hook to handle guess submission. Validate guess and check against answer, ending game if won or lost.
 
@@ -31,7 +31,7 @@ const useGuessSubmission = () => {
             draggable: true,
             progress: undefined,
             theme: "light",
-            transition: Bounce,});
+            transition: Zoom,});
     };
 
     return (guess: string) => {

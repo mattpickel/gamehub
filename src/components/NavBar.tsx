@@ -28,7 +28,7 @@ const NavBar: React.FC = () => {
     };
 
     return (
-        <nav className="bg-gray-800 p-4">
+        <nav className="bg-gray-800 p-3">
             <div className="container mx-auto flex items-center justify-between">
                 <div className="text-white font-semibold">
                     <Link to="/" className="text-white px-3 py-2 rounded-md text-lg font-medium">GameHub</Link>

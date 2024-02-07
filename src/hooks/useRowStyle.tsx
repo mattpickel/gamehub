@@ -11,7 +11,7 @@ const useRowStyle = (): string[][] => {
     const calculateStyles = () => {
         return guesses.map(guess => {
             if (!guess) {
-                return Array.from({ length: 5 }, () => 'bg-white');
+                return Array.from({ length: 5 }, () => 'bg-white border-black');
             }
         
             const guessLetters = guess.split('');
@@ -22,7 +22,7 @@ const useRowStyle = (): string[][] => {
             for (let i = 0; i < guessLetters.length; i++) {
                 if (guessLetters[i] === answerLetters[i]) {
                     remainingLetters.splice(remainingLetters.indexOf(guessLetters[i]), 1);
-                    styles.push('bg-wordle-correct-color text-white');
+                    styles.push('bg-wordle-correct-color border-wordle-correct-color text-white');
                 } else {
                     styles.push('bg-white');  // Placeholder for second pass
                 }
@@ -32,9 +32,9 @@ const useRowStyle = (): string[][] => {
             for (let i = 0; i < guessLetters.length; i++) {
                 if (styles[i] === 'bg-white' && remainingLetters.includes(guessLetters[i])) {
                     remainingLetters.splice(remainingLetters.indexOf(guessLetters[i]), 1);
-                    styles[i] = 'bg-wordle-misplaced-color text-white';
+                    styles[i] = 'bg-wordle-misplaced-color border-wordle-misplaced-color text-white';
                 } else if (styles[i] === 'bg-white') {
-                    styles[i] = 'bg-wordle-incorrect-color text-white';
+                    styles[i] = 'bg-wordle-incorrect-color border-wordle-incorrect-color text-white';
                 }
             }
     
