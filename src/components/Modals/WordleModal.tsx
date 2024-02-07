@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from './Modal';
 import { useWordleUIStore } from '../../stores/useWordleUIStore';
 import Switch from '@mui/material/Switch';
+import wordleHowToPlayImages from '../../assets/imgs/wordleHowToPlayImages.js';
 
 interface WordleModalProps {
     isOpen: boolean;
@@ -89,13 +90,25 @@ const HelpModal: React.FC = () => {
     return (
         <div className='flex flex-col justify-center items-center space-y-8 rounded-lg py-8 px-10 bg-gray-800 text-white'>
             <h1 className='text-3xl font-bold'>How To Play</h1>
-            <h2 className='text-xl'>Guess the secret 5-letter word</h2>
+            <h2 className='text-xl'>Guess the secret 5-letter word!</h2>
             <ul className='text-left'>
                 <li>Letters will change color to based on accuracy.</li>
+                <li>
+                    <img src={wordleHowToPlayImages.exampleAllRight} alt='Example: Correct answer' className={'py-2'}></img>
+                </li>
                 <li>Green letters are in the right position.</li>
+                <li>
+                    <img src={wordleHowToPlayImages.exampleOneRight} alt='Example: Correct letter' className={'py-2'}></img>
+                </li>
                 <li>Yellow letters are in the word but out of place.</li>
+                <li>
+                    <img src={wordleHowToPlayImages.exampleOneMisplaced} alt='Example: Misplaced letter' className={'py-2'}></img>
+                </li>
                 <li>Grey letters are not in the word.</li>
-                <li>You have 6 tries to guess the word.</li>
+                <li>
+                    <img src={wordleHowToPlayImages.exampleAllWrong} alt='Example: Incorrect letters' className={'py-2'}></img>
+                </li>
+                <li>You have 6 tries to guess the word!</li>
             </ul>
         </div>
     )
