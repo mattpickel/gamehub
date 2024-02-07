@@ -25,11 +25,11 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress, letterStatusList }) => 
                         if (key.length === 1) {
                             status = letterStatusList[key.charCodeAt(0) - 65]?.status;
                         }
-                        let className = 'py-2 px-4 bg-gray-200 text-gray-800 font-semibold rounded shadow';
+                        let className = ' bg-gray-200 text-gray-800 font-semibold rounded shadow text-sm sm:text-base md:text-lg';
                         if (key.length > 1) {
                             className += ' flex-grow';
                         } else {
-                            className += ' w-12 h-12';
+                            className += ' w-8 h-12 sm:w-12 sm:h-14';
                         }
                         if (status === 'correct') {
                             className += ' bg-wordle-correct-color text-white';

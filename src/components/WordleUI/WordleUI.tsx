@@ -31,7 +31,7 @@ const WordleUI: React.FC<WordleUIProps> = ({ handleKeyPress, isModalOpen, modalM
     };
 
     return (
-        <main ref={mainRef} tabIndex={-1} className='flex flex-col justify-start items-center space-y-20 mt-16 outline-none' style={{ height: 'calc(100vh - 68px - 8rem)' }}>
+        <main ref={mainRef} tabIndex={-1} className='flex flex-col justify-start items-center space-y-10 md:space-y-20 mt-8 outline-none'>
             <ButtonToolbar buttons={buttons} />
             <Gameboard rowContents={rowContents} rowStyles={rowStyles} />
             <Keyboard onKeyPress={handleKeyPress} letterStatusList={letterStatusList} />

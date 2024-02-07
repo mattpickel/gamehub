@@ -77,10 +77,10 @@ const WordleContainer: React.FC = () => {
     // Define button objects to pass to UI
     type buttonObject = { icon: JSX.Element, onClick: () => void };
     const buttons: buttonObject[] = [
-        { icon: <LeaderboardIcon fontSize='large' />, onClick: handleLeaderboardClick},
-        { icon: <RefreshIcon fontSize='large' />, onClick: handleRestartClick },
-        { icon: <SettingsIcon fontSize='large' />, onClick: handleSettingsClick},
-        { icon: <HelpOutlineIcon fontSize='large' />, onClick: handleHelpClick},
+        { icon: <LeaderboardIcon sx={{fontSize: { xs: 24, sm: 35 } }} />, onClick: handleLeaderboardClick},
+        { icon: <RefreshIcon sx={{fontSize: { xs: 24, sm: 35 } }} />, onClick: handleRestartClick },
+        { icon: <SettingsIcon sx={{fontSize: { xs: 24, sm: 35 } }} />, onClick: handleSettingsClick},
+        { icon: <HelpOutlineIcon sx={{fontSize: { xs: 24, sm: 35 } }} />, onClick: handleHelpClick},
     ];
 
     return (

@@ -48,7 +48,7 @@ const NavBar: React.FC = () => {
                     )}
                 </div>
             </div>
-            <ToastContainer />
+            <ToastContainer limit={1} />
             <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
             <SignUpModal isOpen={isSignUpModalOpen} onClose={() => setSignUpModalOpen(false)} />
         </nav>

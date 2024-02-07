@@ -10,7 +10,7 @@ const Gameboard: React.FC<GameboardProps> = ({ rowContents, rowStyles }) => {
 
     return (
         <>
-            <div className='space-y-2'>
+            <div className='space-y-1 sm:space-y-2'>
                 {Array.from({ length: 6 }).map((_, index) => (
                     <Row key={index} rowContent={rowContents[index]} rowStyle={rowStyles[index]}/>
                 ))}

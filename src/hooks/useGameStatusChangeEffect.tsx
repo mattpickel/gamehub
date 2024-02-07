@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
 import { useWordleUIStore } from '../stores/useWordleUIStore';
+// Change and display game result modal based on game status
 
 const useGameStatusChangeEffect = () => {
     const gameStatus = useWordleGameStore((state) => state.gameStatus);
