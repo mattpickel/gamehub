@@ -1,6 +1,6 @@
 import { useWordleScoreStore } from "../stores/useWordleScoreStore";
 
-const useUpdateScore = () => {
+const useScoreGame = () => {
     const totalGamesPlayed = useWordleScoreStore((state) => state.totalGamesPlayed);
     const totalGamesWon = useWordleScoreStore((state) => state.totalGamesWon);
     const longestStreak = useWordleScoreStore((state) => state.longestStreak);
@@ -26,4 +26,4 @@ const useUpdateScore = () => {
     }
 }
 
-export default useUpdateScore;
+export default useScoreGame;

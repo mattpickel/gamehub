@@ -1,6 +1,6 @@
 import isValidWord from "../utils/validateWordleGuesses";
 import { useWordleGameStore } from "../stores/useWordleGameStore";
-import useUpdateScore from "./useUpdateScore";
+import useScoreGame from "./useScoreGame";
 import { Zoom, toast } from 'react-toastify';
 
 // Custom hook to handle guess submission. Validate guess and check against answer, ending game if won or lost.
@@ -18,7 +18,7 @@ const useGuessSubmission = () => {
         updateLetterStatus,
     } = useWordleGameStore((state) => state);
 
-    const updateScore = useUpdateScore();
+    const scoreGame = useScoreGame();
 
     // Toasty notification and configuration
     const notify = (message: string) => {
@@ -64,12 +64,12 @@ const useGuessSubmission = () => {
         // Check if guess is correct and update game status
         if (guess === answer) {
             updateGameStatus('won');
-            updateScore('won');
+            scoreGame('won');
             return;
         } else {
             if (guessNumber > 5) {
                 updateGameStatus('lost');
-                updateScore('lost');
+                scoreGame('lost');
                 return;
             } else {
                 notify('Wrong guess, try again.');

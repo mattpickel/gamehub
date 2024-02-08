@@ -5,7 +5,7 @@ import useKeyHandler from '../hooks/useKeyHandler';
 import useGameStatusChangeEffect from '../hooks/useGameStatusChangeEffect';
 import useRowContent from '../hooks/useRowContent';
 import useRowStyle from '../hooks/useRowStyle';
-import useUpdateScore from '../hooks/useUpdateScore';
+import useUpdateScore from '../hooks/useScoreGame';
 import { useWordleUIStore } from '../stores/useWordleUIStore';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
 import RefreshIcon from '@mui/icons-material/Refresh';

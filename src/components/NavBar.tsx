@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { SignedOut, useAuth, useUser } from '@clerk/clerk-react';
 import LoginModal from './Modals/LoginModal';
 import SignUpModal from './Modals/SignUpModal';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useGetUserScore from '../hooks/useGetUserScore';
 
 const NavBar: React.FC = () => {
 
@@ -26,6 +27,20 @@ const NavBar: React.FC = () => {
     const handleLogoutClick = async () => {
         await signOut();
     };
+
+    const initialRender = useRef(true);
+
+    const getUserScoreFromDb = useGetUserScore();
+
+    useEffect(() => {
+        if (!initialRender.current && isSignedIn && user) {
+            console.log('Login Change: User is signed in');
+            getUserScoreFromDb(user.id);
+        } else {
+            console.log('Login Change: User is signed out');
+        }
+        initialRender.current = false;
+    }, [isSignedIn]);
 
     return (
         <nav className="bg-gray-800 p-3">
