@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth, useUser } from '@clerk/clerk-react';
+import { SignedOut, useAuth, useUser } from '@clerk/clerk-react';
 import LoginModal from './Modals/LoginModal';
 import SignUpModal from './Modals/SignUpModal';
 import { ToastContainer } from 'react-toastify';
@@ -49,8 +49,10 @@ const NavBar: React.FC = () => {
                 </div>
             </div>
             <ToastContainer limit={1} />
-            <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
-            <SignUpModal isOpen={isSignUpModalOpen} onClose={() => setSignUpModalOpen(false)} />
+            <SignedOut>
+                <LoginModal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)} />
+                <SignUpModal isOpen={isSignUpModalOpen} onClose={() => setSignUpModalOpen(false)} />
+            </SignedOut>
         </nav>
     );
 };
