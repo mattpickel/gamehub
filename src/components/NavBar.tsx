@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { SignedOut, useAuth, useUser } from '@clerk/clerk-react';
 import LoginModal from './Modals/LoginModal';

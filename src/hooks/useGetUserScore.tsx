@@ -1,5 +1,4 @@
 import { useWordleScoreStore } from "../stores/useWordleScoreStore";
-import useUpdateScore from "./useScoreGame";
 import users from "../data/users"; 
 
 const useGetUserScore = () => {

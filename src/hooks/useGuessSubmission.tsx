@@ -57,7 +57,6 @@ const useGuessSubmission = () => {
             } else if (currentStatus === 'not-guessed') {
                 updateLetterStatus(letter, 'incorrect');
             }
-        
         })
         console.log('answer:' + answer);
 
@@ -76,8 +75,6 @@ const useGuessSubmission = () => {
                 incrementGuessNumber();
                 setInput('');
             }
-            
-            
             return;
         }
     };
