@@ -5,13 +5,14 @@ import useKeyHandler from '../hooks/useKeyHandler';
 import useGameStatusChangeEffect from '../hooks/useGameStatusChangeEffect';
 import useRowContent from '../hooks/useRowContent';
 import useRowStyle from '../hooks/useRowStyle';
-import useUpdateScore from '../hooks/useScoreGame';
+import useUpdateAndSaveScore from '../hooks/useUpdateAndSaveScore';
 import { useWordleUIStore } from '../stores/useWordleUIStore';
 import { useWordleGameStore } from '../stores/useWordleGameStore';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import { useUser } from '@clerk/clerk-react';
 
 const WordleContainer: React.FC = () => {
     // User input is handled with key keypresses. Attach handler to keylistener and pass to UI for use w/ virtual keyboard
@@ -42,14 +43,15 @@ const WordleContainer: React.FC = () => {
     // Get reset and score update methods from game store and pass to UI for use in buttons
     // Define click handlers for other buttons
     const resetGame = useWordleGameStore((state) => state.resetGame);
-    const updateScore = useUpdateScore();
+    const { user } = useUser();
+    const { updateAndSaveScore } = useUpdateAndSaveScore(user?.id ?? '');
     const handlePlayAgain = () => {
         resetGame();
     }
 
     const handleRestartGame = () => {
         resetGame();
-        updateScore('lost');
+        updateAndSaveScore('lost');
         setIsModalOpen(false);
     }
 

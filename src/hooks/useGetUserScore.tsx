@@ -1,35 +1,45 @@
+import { useEffect, useState } from "react";
 import { useWordleScoreStore } from "../stores/useWordleScoreStore";
-import users from "../data/users"; 
 
-const useGetUserScore = () => {
+const apiBaseUrl = import.meta.env.VITE_DEV_API_URL;
+
+const useGetUserScore = (userId: string) => {
     const updateTotalGamesPlayed = useWordleScoreStore((state) => state.updateTotalGamesPlayed);
     const updateTotalGamesWon = useWordleScoreStore((state) => state.updateTotalGamesWon);
     const updateLongestStreak = useWordleScoreStore((state) => state.updateLongestStreak);
     const updateCurrentStreak = useWordleScoreStore((state) => state.updateCurrentStreak);
 
-    return (userId: string) => {
-        if (!userId) {
-            return;
-        }
-        const user = users.find(user => user.id === userId);
-        if (!user) {
-            return;
-        }
-        const userScore = {
-            totalGamesPlayed: user.totalGamesPlayed,
-            totalGamesWon: user.totalGamesWon,
-            longestStreak: user.longestStreak,
-            currentStreak: user.currentStreak
-        }
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<Error | null>(null); 
 
-        updateTotalGamesPlayed(userScore.totalGamesPlayed);
-        updateTotalGamesWon(userScore.totalGamesWon);
-        updateLongestStreak(userScore.longestStreak);
-        updateCurrentStreak(userScore.currentStreak);
+    useEffect(() => {
+        const fetchUserScore = async () => {
+            if (!userId) return;
 
-        console.log('User Score:', userScore);
-        return;
-    }
+            setLoading(true);
+            try {
+                const response = await fetch(`${apiBaseUrl}/users/${userId}`);
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status} - ${response.statusText}`);
+                }
+                const userScore = await response.json();
+
+                updateTotalGamesPlayed(userScore.totalGamesPlayed);
+                updateTotalGamesWon(userScore.totalGamesWon);
+                updateLongestStreak(userScore.longestStreak);
+                updateCurrentStreak(userScore.currentStreak);
+            } catch (error) {
+                console.error('Failed to fetch user score:', error);
+                setError(error as Error); 
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserScore();
+    }, [userId, updateTotalGamesPlayed, updateTotalGamesWon, updateLongestStreak, updateCurrentStreak]);
+
+    return { loading, error };
 }
 
 export default useGetUserScore;

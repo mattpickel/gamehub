@@ -30,17 +30,17 @@ const NavBar: React.FC = () => {
 
     const initialRender = useRef(true);
 
-    const getUserScoreFromDb = useGetUserScore();
+    const getUserScoreFromDb = useGetUserScore(user?.id ??  '');
 
-    useEffect(() => {
-        if (!initialRender.current && isSignedIn && user) {
-            console.log('Login Change: User is signed in');
-            getUserScoreFromDb(user.id);
-        } else {
-            console.log('Login Change: User is signed out');
-        }
-        initialRender.current = false;
-    }, [isSignedIn]);
+    // useEffect(() => {
+    //     if (!initialRender.current && isSignedIn && user) {
+    //         console.log('Login Change: User is signed in');
+    //         getUserScoreFromDb(user.id);
+    //     } else {
+    //         console.log('Login Change: User is signed out');
+    //     }
+    //     initialRender.current = false;
+    // }, [isSignedIn]);
 
     return (
         <nav className="bg-gray-800 p-3">
