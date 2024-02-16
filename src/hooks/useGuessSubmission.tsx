@@ -4,7 +4,7 @@ import useUpdateAndSaveScore from "./useUpdateAndSaveScore";
 import { Zoom, toast } from 'react-toastify';
 import { useUser } from "@clerk/clerk-react";
 
-// Custom hook to handle guess submission. Validate guess and check against answer, ending game if won or lost.
+// Custom hook to handle guess submission. Validate guess and check against answer, ending game if won or lost and updating score accordingly.
 
 const useGuessSubmission = () => {
     // Get state and actions from game store

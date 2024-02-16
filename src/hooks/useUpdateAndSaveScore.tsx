@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useWordleScoreStore } from "../stores/useWordleScoreStore";
+// Update and save user score to the backend/score store
 
 const apiBaseUrl = import.meta.env.VITE_DEV_API_URL;
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { SignedOut, useAuth, useUser } from '@clerk/clerk-react';
 import LoginModal from './Modals/LoginModal';
@@ -28,19 +28,7 @@ const NavBar: React.FC = () => {
         await signOut();
     };
 
-    const initialRender = useRef(true);
-
-    const getUserScoreFromDb = useGetUserScore(user?.id ??  '');
-
-    // useEffect(() => {
-    //     if (!initialRender.current && isSignedIn && user) {
-    //         console.log('Login Change: User is signed in');
-    //         getUserScoreFromDb(user.id);
-    //     } else {
-    //         console.log('Login Change: User is signed out');
-    //     }
-    //     initialRender.current = false;
-    // }, [isSignedIn]);
+    useGetUserScore(user?.id ??  '');
 
     return (
         <nav className="bg-gray-800 p-3">

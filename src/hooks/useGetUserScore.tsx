@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useWordleScoreStore } from "../stores/useWordleScoreStore";
+// Retreive user score from the backend
 
 const apiBaseUrl = import.meta.env.VITE_DEV_API_URL;
 
