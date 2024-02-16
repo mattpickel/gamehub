@@ -55,7 +55,7 @@ export const useWordleGameStore = create<State>()((set) => ({
     incrementGuessNumber: () => set((state) => ({ guessNumber: state.guessNumber + 1 })),
     resetGame: () => set((state) => {
         state.resetLetterStatus();
-        return { guessNumber: 1, guesses: Array(6).fill(''), currentInput: '', totalScore: 0, gameStatus: 'playing', answer: generateRandomWord() };
+        return { guessNumber: 1, guesses: Array(6).fill(''), currentInput: '', totalScore: 0, gameStatus: 'playing', answer: generateRandomWord(), correctLettersForHardMode: [], misplacedLettersForHardMode: []};
     }),
     updateGameStatus: (status: 'playing' | 'won' | 'lost') => set({ gameStatus: status }),
     updateLetterStatus(letter: string, status: 'correct' | 'incorrect' | 'misplaced' | 'not-guessed') {
