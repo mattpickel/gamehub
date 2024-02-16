@@ -10,6 +10,9 @@ const useGuessSubmission = () => {
     // Get state and actions from game store
     const {
         answer,
+        correctLettersForHardMode,
+        misplacedLettersForHardMode,
+        isHardMode,
         addGuess,
         incrementGuessNumber,
         setInput,
@@ -17,6 +20,8 @@ const useGuessSubmission = () => {
         updateGameStatus,
         letterStatusList,
         updateLetterStatus,
+        updateCorrectLettersForHardMode,
+        updateMisplacedLettersForHardMode
     } = useWordleGameStore((state) => state);
 
     const { user } = useUser();
@@ -46,20 +51,51 @@ const useGuessSubmission = () => {
             notify('Guess must be a valid word');
             return;
         }
+        let isGuessValidForHardMode = true;
+        if (isHardMode) {
+            correctLettersForHardMode.forEach((correctLetter) => {
+                if (guess[correctLetter.index] !== correctLetter.letter) {
+                    notify('Must use correct letters in hard mode');
+                    isGuessValidForHardMode = false;
+                    console.log('correct letter not in guess')
+                }
+            });
+
+            if (!isGuessValidForHardMode) return; // Early return if guess is invalid
+
+            misplacedLettersForHardMode.forEach((letter) => {
+                if (!guess.includes(letter)) {
+                    notify('Must use misplaced letters in hard mode');
+                    isGuessValidForHardMode = false;
+                    console.log('misplaced letter not in guess')
+                }
+            });
+
+            if (!isGuessValidForHardMode) return; // Early return if guess is invalid
+        }
+
+        if (!isGuessValidForHardMode) return; // Prevent guess submission if it doesn't meet hard mode criteria
+
         // Add guess to list of guesses 
         addGuess(guess);
 
         // Update key status for virtual keyboard to reflect guessed letters
+        const newCorrectLetters: { letter: string, index: number }[] = [];
+        const newMisplacedLetters: string[] = [];
         guess.split('').forEach((letter, index) => {
             const currentStatus = letterStatusList[letter.charCodeAt(0) - 65].status;
             if (letter === answer[index]) {
                 updateLetterStatus(letter, 'correct');
+                newCorrectLetters.push({ letter, index });
             } else if (answer.includes(letter) && currentStatus !== 'correct') {
                 updateLetterStatus(letter, 'misplaced');
+                newMisplacedLetters.push(letter);
             } else if (currentStatus === 'not-guessed') {
                 updateLetterStatus(letter, 'incorrect');
             }
         })
+        updateCorrectLettersForHardMode(newCorrectLetters);
+        updateMisplacedLettersForHardMode(newMisplacedLetters);
         console.log('answer:' + answer);
 
         // Check if guess is correct and update game status

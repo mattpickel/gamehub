@@ -6,6 +6,11 @@ type LetterStatus = {
     status: 'correct' | 'incorrect' | 'misplaced' | 'not-guessed';
 };
 
+type correctLetterForHardMode = { 
+    letter: string, 
+    index: number 
+};
+
 type State = {
     guessNumber: number;
     guesses: string[];
@@ -13,6 +18,9 @@ type State = {
     gameStatus: 'playing' | 'won' | 'lost';
     answer: string;
     letterStatusList: LetterStatus[];
+    correctLettersForHardMode: correctLetterForHardMode[];
+    misplacedLettersForHardMode: string[];
+    isHardMode: boolean;
     addGuess: (guess: string) => void;
     setInput: (input: string) => void;
     incrementGuessNumber: () => void;
@@ -20,6 +28,9 @@ type State = {
     updateGameStatus: (status: 'playing' | 'won' | 'lost') => void;
     updateLetterStatus: (letter: string, status: 'correct' | 'incorrect' | 'misplaced' | 'not-guessed') => void;
     resetLetterStatus: () => void;
+    updateCorrectLettersForHardMode: (newCorrectLetters: correctLetterForHardMode[]) => void;
+    updateMisplacedLettersForHardMode: (letters: string[]) => void;
+    toggleIsHardMode: () => void;
 };
 
 export const useWordleGameStore = create<State>()((set) => ({
@@ -32,6 +43,9 @@ export const useWordleGameStore = create<State>()((set) => ({
         letter: String.fromCharCode(65 + i),
         status: 'not-guessed'
       })),
+    correctLettersForHardMode: [],
+    misplacedLettersForHardMode: [],
+    isHardMode: false,
     addGuess: (guess: string) => set((state) => {
         const newGuesses = [...state.guesses];
         newGuesses[state.guessNumber - 1] = guess;
@@ -58,6 +72,9 @@ export const useWordleGameStore = create<State>()((set) => ({
         letter: String.fromCharCode(65 + i),
         status: 'not-guessed'
       })) }),
+    updateCorrectLettersForHardMode: (newCorrectLetters: correctLetterForHardMode[]) => set({ correctLettersForHardMode: newCorrectLetters }),
+    updateMisplacedLettersForHardMode: (letters: string[]) => set({ misplacedLettersForHardMode: letters }),
+    toggleIsHardMode: () => set((state) => ({ isHardMode: !state.isHardMode })),
 }));
 
 if (process.env.NODE_ENV === 'development') {

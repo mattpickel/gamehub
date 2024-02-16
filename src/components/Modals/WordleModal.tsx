@@ -7,6 +7,7 @@ import Switch from '@mui/material/Switch';
 import wordleHowToPlayImages from '../../assets/imgs/wordleHowToPlayImages.js';
 import useFetchLeaderboard from '../../hooks/useFetchLeaderboard';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useWordleGameStore } from '../../stores/useWordleGameStore.js';
 
 interface WordleModalProps {
     isOpen: boolean;
@@ -71,11 +72,13 @@ const SettingsModal: React.FC = () => {
     const { theme, toggleTheme } = useTheme();
     const isScoreDisplayed = useWordleUIStore((state) => state.isScoreDisplayed);
     const setIsScoreDisplayed = useWordleUIStore((state) => state.setIsScoreDisplayed);
+    const isHardMode = useWordleGameStore((state) => state.isHardMode);
+    const toggleIsHardMode = useWordleGameStore((state) => state.toggleIsHardMode);
 
     // Define labels for settings switches
     const switchSettings: SwitchSetting[] = [
         { inputProps: { checked: theme === 'dark', onChange: () => toggleTheme() }, displayText: 'Dark Mode' },
-        { inputProps: { onChange: (event) => console.log(event) }, displayText: 'Hard Mode' },
+        { inputProps: { checked: isHardMode, onChange: () => toggleIsHardMode() }, displayText: 'Hard Mode' },
         { inputProps: { checked: isScoreDisplayed, onChange: (event) => setIsScoreDisplayed(event.target.checked)}, displayText: 'Show My Stats' }
     ];
     return (
