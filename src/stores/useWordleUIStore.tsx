@@ -15,7 +15,7 @@ export const useWordleUIStore = create<State>()((set) => ({
   isModalOpen: false,
   modalMessage: '',
   modalType: '',
-  isScoreDisplayed: false,
+  isScoreDisplayed: true,
   setIsModalOpen: (isOpen: boolean) => set({ isModalOpen: isOpen }),
   setModalMessage: (message: string) => set({ modalMessage: message }),
   setModalType: (type: string) => set({ modalType: type }),

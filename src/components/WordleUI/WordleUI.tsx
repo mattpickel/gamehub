@@ -33,7 +33,7 @@ const WordleUI: React.FC<WordleUIProps> = ({ handleKeyPress, isModalOpen, modalM
     const isScoreDisplayed = useWordleUIStore((state) => state.isScoreDisplayed);
 
     return (
-        <main ref={mainRef} tabIndex={-1} className='flex-grow flex flex-col outline-none space-y-8 sm:space-y-12 mt-10 '>          
+        <main ref={mainRef} tabIndex={-1} className='flex-grow flex flex-col outline-none space-y-8 sm:space-y-12 pt-10 dark:bg-neutral-800'>          
             <ButtonToolbar buttons={buttons} />
             <div className='flex flex-col items-center space-y-6 sm:space-y-12'>
                 {isScoreDisplayed ? <ScoreDisplay /> : null}

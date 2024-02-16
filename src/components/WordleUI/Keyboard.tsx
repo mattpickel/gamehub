@@ -25,7 +25,7 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress, letterStatusList }) => 
                         if (key.length === 1) {
                             status = letterStatusList[key.charCodeAt(0) - 65]?.status;
                         }
-                        let className = ' bg-gray-200 text-gray-800 font-semibold rounded shadow text-sm sm:text-base md:text-lg';
+                        let className = ' bg-gray-200 text-gray-800 font-semibold rounded shadow text-sm sm:text-base md:text-lg ';
                         if (key.length > 1) {
                             className += ' flex-grow max-w-[60px] sm:max-w-[75px]';
                         } else {
@@ -34,11 +34,11 @@ const Keyboard: React.FC<KeyboardProps> = ({ onKeyPress, letterStatusList }) => 
                         if (status === 'correct') {
                             className += ' bg-wordle-correct-color text-white';
                         } else if (status === 'incorrect') {
-                            className += ' bg-wordle-incorrect-color text-white';
+                            className += ' bg-wordle-incorrect-color text-white dark:bg-neutral-700';
                         } else if (status === 'misplaced') {
                             className += ' bg-wordle-misplaced-color text-white';
                         } else {
-                            className += ' hover:bg-gray-300';
+                            className += ' hover:bg-gray-300 dark:bg-neutral-400 dark:text-white';
                         }
                         return (
                             <button

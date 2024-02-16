@@ -6,6 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import wordleHowToPlayImages from '../../assets/imgs/wordleHowToPlayImages.js';
 import useFetchLeaderboard from '../../hooks/useFetchLeaderboard';
+import { useTheme } from '../../contexts/ThemeContext';
 
 interface WordleModalProps {
     isOpen: boolean;
@@ -33,8 +34,8 @@ type SwitchSetting = {
 const LeaderBoardModal: React.FC = () => {
     const { leaderboardData, loading, error } = useFetchLeaderboard(import.meta.env.VITE_DEV_API_URL);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    if (loading) return <div className="text-white py-8 px-10">Loading...</div>;
+    if (error) return <div className="text-white py-8 px-10">Sorry, the leaderboard is down. Please try again later!</div>;
 
     return (
         <div className='flex flex-col justify-center items-center space-y-8 rounded-lg py-8 px-10 bg-gray-800 text-white'>
@@ -67,12 +68,13 @@ const RestartModal: React.FC<RestartModalProps> = ({ onRestart }) => {
 };
 
 const SettingsModal: React.FC = () => {
+    const { theme, toggleTheme } = useTheme();
     const isScoreDisplayed = useWordleUIStore((state) => state.isScoreDisplayed);
     const setIsScoreDisplayed = useWordleUIStore((state) => state.setIsScoreDisplayed);
 
     // Define labels for settings switches
     const switchSettings: SwitchSetting[] = [
-        { inputProps: { onChange: (event) => console.log(event) }, displayText: 'Dark Mode' },
+        { inputProps: { checked: theme === 'dark', onChange: () => toggleTheme() }, displayText: 'Dark Mode' },
         { inputProps: { onChange: (event) => console.log(event) }, displayText: 'Hard Mode' },
         { inputProps: { checked: isScoreDisplayed, onChange: (event) => setIsScoreDisplayed(event.target.checked)}, displayText: 'Show My Stats' }
     ];

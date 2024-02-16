@@ -17,7 +17,7 @@ const ScoreDisplay: React.FC = () => {
     ];
 
     return (
-        <ul className='flex items-center justify-center text-gray-800 text-sm sm:text-base font-bold space-x-4'>
+        <ul className='flex items-center justify-center text-gray-800 text-sm sm:text-base font-bold space-x-4 dark:text-white'>
             {scoreItems.map((item, index) => (
                 <li key={index} className='flex flex-col text-center'>
                     <h3 className='underline decoration-2'>

@@ -11,7 +11,7 @@ const useRowStyle = (): string[][] => {
     const calculateStyles = () => {
         return guesses.map(guess => {
             if (!guess) {
-                return Array.from({ length: 5 }, () => 'bg-white border-black');
+                return Array.from({ length: 5 }, () => 'bg-white border-black dark:bg-neutral-800 dark:border-neutral-500 dark:text-white');
             }
         
             const guessLetters = guess.split('');
