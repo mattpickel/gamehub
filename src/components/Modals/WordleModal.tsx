@@ -5,6 +5,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import wordleHowToPlayImages from '../../assets/imgs/wordleHowToPlayImages.js';
+import useFetchLeaderboard from '../../hooks/useFetchLeaderboard';
 
 interface WordleModalProps {
     isOpen: boolean;
@@ -29,32 +30,26 @@ type SwitchSetting = {
     displayText: string,
 };
 
-
-
-// State for each switch
-
-
 const LeaderBoardModal: React.FC = () => {
+    const { leaderboardData, loading, error } = useFetchLeaderboard(import.meta.env.VITE_DEV_API_URL);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+
     return (
         <div className='flex flex-col justify-center items-center space-y-8 rounded-lg py-8 px-10 bg-gray-800 text-white'>
             <h1 className='text-3xl font-bold'>Leaderboard</h1>
             <h2 className='text-xl'>Highest Streak</h2>
-            <ol className='text-left'>
-                <li>Player 1: 10</li>
-                <li>Player 2: 9</li>
-                <li>Player 3: 8</li>
+            <ol className='text-center'>
+                {leaderboardData.highestStreakLeaders.map((player, index) => (
+                    <li key={index}>{player.username}: {player.score}</li>
+                ))}
             </ol>
             <h2 className='text-xl'>Most Wins</h2>
-            <ol className='text-left'>
-                <li>Player 1: 83</li>
-                <li>Player 2: 76</li>
-                <li>Player 3: 54</li>
-            </ol>
-            <h2 className='text-xl'>Best Win Percentage</h2>
-            <ol className='text-left'>
-                <li>Player 1: 87%</li>
-                <li>Player 2: 84%</li>
-                <li>Player 3: 76%</li>
+            <ol className='text-center'>
+                {leaderboardData.mostWinsLeaders.map((player, index) => (
+                    <li key={index}>{player.username}: {player.score}</li>
+                ))}
             </ol>
         </div>
     )

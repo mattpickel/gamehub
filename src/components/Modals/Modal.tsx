@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import CancelIcon from '@mui/icons-material/Cancel';
+// Base modal component with dialog element controls. Extend for specific modals.
 
 interface ModalProps {
     isOpen: boolean;
